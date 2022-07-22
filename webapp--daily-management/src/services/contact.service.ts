@@ -13,23 +13,23 @@ export class ContactService {
   api = 'http://localhost:3000';
 
   getContacts(): Observable<any> {
-    return this.http.get(`${this.api}/contact`);
+    return this.http.get(`${this.api}/contacts`);
   }
 
   getContanct(id: number): Observable<any> {
-    return this.http.get(`${this.api}/contact/${id}`);
+    return this.http.get(`${this.api}/contacts/${id}`);
   }
 
   addContanct(contact: Contact): Observable<any> {
-    return this.http.post(`${this.api}/contact/${contact}`, contact);
+    return this.http.post(`${this.api}/contacts/${contact}`, contact);
   }
 
   updateContanct(contanct: Contact): Observable<any> {
-    return this.http.put(`${this.api}/contact/${contanct.id}`, contanct);
+    return this.http.put(`${this.api}/contacts/${contanct.id}`, contanct);
   }
 
   removeContanct(contanct: Contact): Observable<any> {
-    return this.http.delete(`${this.api}/contact/${contanct.id}`);
+    return this.http.delete(`${this.api}/contacts/${contanct.id}`);
   }
   
 }
