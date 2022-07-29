@@ -1,7 +1,14 @@
 const express = require('express');
+const db = require('./src/config/dbConnect');
 const app = express();
+const log = require('./src/logger/logger.js');
 const todosRoutes = require('./src/routes/todos.routes.js');
 const contactsRoutes = require('./src/routes/contacts.routes.js');
+
+db.on('error', console.log.bind(console, 'Connection Error'));
+db.once('open', () => {
+    console.log('db connection succesful!')
+})
 
 require('dotenv').config()
 
@@ -10,7 +17,7 @@ app.use('/todos', todosRoutes);
 app.use('/contacts', contactsRoutes);
 
 app.use((req, res, next) => {
-    // TODO: jwt auth
+    log(req);
     next();
 });
 
