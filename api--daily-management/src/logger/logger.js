@@ -6,7 +6,6 @@ function createLogFile(log) {
 }
 
 function createLogStr(request) {
-    console.log(request)
     return `Log at: ${new Date()}\n\n`;
 }
 

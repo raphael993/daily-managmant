@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 
 const todoSchema = new mongoose.Schema(
     {
-        id: { type: String },
-        name: { type: String, required: true },
-        description: { type: String, required: true },
-        type: { type: String, required: true },
-        status: { type: Number, required: true }
+        todoName: { type: String, required: true },
+        todoDescription: { type: String, required: true },
+        todoDate: { type: String, required: true },
+        todoTime: { type: String, required: true },
+        todoLocation: { type: String, required: true },
+        todoStatus: { type: Number }
     }
 )
 

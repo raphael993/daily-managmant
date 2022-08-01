@@ -28,7 +28,7 @@ class TodoController {
         const todo = req.body;
 
         try {
-            await todos.insertMany([todo], (err, result) => res.status(201).send('todo added!'))
+            await todos.insertMany([todo], (err, result) => res.status(201).json({ status: 'todo added!' }))
         } catch(err) {
             res.status(500);
         }
@@ -52,7 +52,7 @@ class TodoController {
         const { _id } = req.params
 
         try {
-            await todos.deleteOne({ _id }, (err, result) => res.status(200).send('todo deleted'))
+            await todos.deleteOne({ _id }, (err, result) => res.status(200).json({ status: 'todo added!' }))
         } catch(err) {
             res.status(500);
         }

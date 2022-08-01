@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Todo } from 'src/models/todo.model';
+import { Todo } from 'src/shared/models/todo.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,20 +16,21 @@ export class TodoService {
     return this.http.get(`${this.api}/todos`);
   }
 
-  getTodo(id: number): Observable<any> {
+  getTodo(id: string): Observable<any> {
     return this.http.get(`${this.api}/todos/${id}`);
   }
 
   addTodo(todo: Todo): Observable<any> {
-    return this.http.post(`${this.api}/todos/${todo}`, todo);
+    return this.http.post(`${this.api}/todos/`, todo);
   }
 
   updateTodo(todo: Todo): Observable<any> {
-    return this.http.put(`${this.api}/todos/${todo.id}`, todo);
+    debugger
+    return this.http.put(`${this.api}/todos/${todo._id}`, todo);
   }
 
-  removeTodo(todo: Todo): Observable<any> {
-    return this.http.delete(`${this.api}/todos/${todo.id}`);
+  removeTodo(_id: string): Observable<any> {
+    return this.http.delete(`${this.api}/todos/${_id}`);
   }
 
 }

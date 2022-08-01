@@ -6,18 +6,24 @@
             <th>description</th>
             <th>When</th>
             <th>Where</th>
+            <th>Date</th>
             <th>Status</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>1</td>
-            <td>Feed the dog</td>
-            <td>We need to fedd the dog</td>
-            <td>today</td>
-            <td>at home</td>
-            <td>pending</td>
+        <tr *ngFor="let todo of todoList; let i=index">
+            <td>{{ i }}</td>
+            <td>{{ todo.todoName }}</td>
+            <td>{{ todo.todoDescription }}</td>
+            <td>{{ todo.todoTime }}</td>
+            <td>{{ todo.todoLocation }}</td>
+            <td>{{ todo.todoDate }}</td>
+            <td>{{ todo.todoStatus }}</td>
+            <td>
+                <button (click)="onEditTodo(todo)">Edit</button>
+                <button (click)="onRemoveTodo(todo)">remove</button>
+            </td>
         </tr>
-
     </tbody>
 </table>
