@@ -1,0 +1,26 @@
+.todo__header {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #DDD;
+}
+
+.todo__lists {
+
+    &--today {
+        padding: 5px;
+        border: 1px solid green;
+        margin-bottom: 20px;
+    }
+
+    &--all {
+        padding: 5px;
+        border: 1px solid gray;
+    }
+}
+
+.general-buttons {
+    margin-bottom: 10px;
+
+    button {
+        margin-right: 5px;
+    }
+}

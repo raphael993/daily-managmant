@@ -1,0 +1,33 @@
+<form [formGroup]="todoForm">
+    <div class="form-group">
+      <label for="todo-name">Todo name</label>
+      <input type="text" class="form-control" id="todoName" formControlName="todoName" placeholder="Add a name to your TO-DO">
+      <small id="todolHelp" class="form-text text-muted">Choose a short and direct name.</small>
+    </div>
+
+    <div class="form-group">
+      <label for="todoDescription">Description</label>
+      <input type="text" class="form-control" id="todoDescription" formControlName="todoDescription" placeholder="add a description to your TO-DO">
+    </div>
+
+    <div class="form-group col-md-2">
+        <label for="todoWhen">When?</label>
+        <input type="date" class="form-control" id="todoWhen" formControlName="todoWhen">
+    </div>
+
+    <div class="form-group col-md-2">
+        <label for="todoWhen">What time?</label>
+        <input type="time" class="form-control" id="todoTime" formControlName="todoTime">
+    </div>
+
+    <div class="form-group form-check">
+      <input type="checkbox" class="form-check-input" id="activeTodoCheck">
+      <label class="form-check-label" for="activeTodoCheck">Create as an active TO-DO</label>
+    </div>
+
+    <div class="d-flex flex-row-reverse general-buttons">
+        <button type="button" class="btn btn-danger">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="onSubmitTodoForm()">Add</button>
+    </div>
+
+  </form>

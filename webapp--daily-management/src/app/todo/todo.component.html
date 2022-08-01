@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="col md-12 todo__header">
+        <h2>welcome to your daily TO-DO's</h2>
+        <small>manage you day here</small>
+    </div>
+
+    <div class="col md-12">
+
+
+        <div class="row general-buttons">
+            <div class="d-flex flex-row-reverse">
+                <button type="button" class="btn btn-primary" (click)="toggleTodoForm()">Add a new TO-DO</button>
+                <button type="button" class="btn btn-secondary" (click)="toggleButtonAllTodos()">{{ showButtonAllTodos ? 'Hide' : 'Show'  }} all TO-DO's</button>
+              </div>
+        </div>
+
+        <div class="todo__form" *ngIf="showTodoForm">
+            <app-todo-form [todoForm]="todoForm"></app-todo-form>
+        </div>
+
+        <div class="row" class="todo__lists">
+            
+            <div class="todo__lists--today">
+                <p>TO-DO's for today:</p>
+                <app-todo-group></app-todo-group>
+            </div>
+            
+            <div class="todo__lists--all" *ngIf="showButtonAllTodos">
+                <app-todo-group></app-todo-group>
+            </div>
+            
+        </div>
+
+
+    </div>
+</div>
