@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 import { Contact } from 'src/shared/models/contact.model';
 
 @Injectable({
@@ -10,26 +11,24 @@ export class ContactService {
 
   constructor(readonly http: HttpClient) { }
 
-  api = 'http://localhost:3000';
-
   getContacts(): Observable<any> {
-    return this.http.get(`${this.api}/contacts`);
+    return this.http.get(`${environment.api}/contacts`);
   }
 
   getContanct(id: number): Observable<any> {
-    return this.http.get(`${this.api}/contacts/${id}`);
+    return this.http.get(`${environment.api}/contacts/${id}`);
   }
 
   addContanct(contact: Contact): Observable<any> {
-    return this.http.post(`${this.api}/contacts/${contact}`, contact);
+    return this.http.post(`${environment.api}/contacts/${contact}`, contact);
   }
 
   updateContanct(contanct: Contact): Observable<any> {
-    return this.http.put(`${this.api}/contacts/${contanct.id}`, contanct);
+    return this.http.put(`${environment.api}/contacts/${contanct.id}`, contanct);
   }
 
   removeContanct(contanct: Contact): Observable<any> {
-    return this.http.delete(`${this.api}/contacts/${contanct.id}`);
+    return this.http.delete(`${environment.api}/contacts/${contanct.id}`);
   }
   
 }

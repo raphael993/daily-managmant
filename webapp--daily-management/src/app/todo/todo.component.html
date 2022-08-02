@@ -18,8 +18,8 @@
             <app-todo-form
                 [todoForm]="todoForm"
                 [isEdditingForm]="isEdditingForm"
-                (submitTodoForm)="onSubmitTodoForm($event)"
-                (submitEditTodoForm)="onSubmitEditTodoForm($event)"
+                (submitTodoForm)="onSubmitTodoForm()"
+                (submitEditTodoForm)="onSubmitEditTodoForm()"
                 (cancel)="onCancelTodoForm()"
             ></app-todo-form>
         </div>
@@ -29,14 +29,14 @@
             <div class="todo__lists--today">
                 <p>TO-DO's for today:</p>
                 <app-todo-group 
-                    *ngIf="todoList.length"
+                    *ngIf="todoList?.length"
                     [todoList]="todoList"
                     (removeTodo)="onRemoveTodo($event)"
                     (editTodo)="onEditTodo($event)"
                 ></app-todo-group>
             </div>
             
-            <div class="todo__lists--all" *ngIf="showButtonAllTodos && todoList.length">
+            <div class="todo__lists--all" *ngIf="showButtonAllTodos && todoList?.length">
                 <app-todo-group [todoList]="todoList"></app-todo-group>
             </div>
             

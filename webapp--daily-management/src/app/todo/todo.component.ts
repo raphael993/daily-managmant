@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import  { FormBuilder, FormGroup }  from  '@angular/forms';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { Todo } from 'src/shared/models/todo.model';
 import { TodoService } from 'src/shared/services/todo.service';
+import { AddTodo, GetTodos, RemoveTodo, UpdateTodo } from 'src/shared/state/todo/todo.actions';
+import { TodosState, TodoStateModel } from 'src/shared/state/todo/todo.state';
 
 @Component({
   selector: 'app-todo',
@@ -9,20 +14,37 @@ import { TodoService } from 'src/shared/services/todo.service';
 })
 export class TodoComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private todoService: TodoService) { }
+  @Select(TodosState) todosState$: Observable<TodoStateModel> | undefined;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private todoService: TodoService,
+    private store: Store
+  ) { }
 
   showButtonAllTodos = false;
   showTodoForm = false;
   isEdditingForm = false;
-  todoList = [];
-  todoForm: any 
+  todoList: any;
+  todoForm: any;
 
 
   ngOnInit(): void {
+    this.createSubscribes();
     this.createTodoForm();
     this.getTodos();
   }
 
+  createSubscribes() {
+    this.subscribeToTodos();
+  }
+    
+  subscribeToTodos() {
+    this.todosState$?.subscribe(res => {
+      this.todoList = res.todos;
+    })
+  }
+  
   createTodoForm() {
     return this.todoForm = this.formBuilder.group({
       _id: [null],
@@ -36,44 +58,27 @@ export class TodoComponent implements OnInit {
   }
 
   getTodos() {
-    return this.todoService.getTodos().subscribe(res => {
-      this.todoList = res;
-    })
+    this.store.dispatch(new GetTodos());
   }
 
-  toggleButtonAllTodos() {
-    return this.showButtonAllTodos = !this.showButtonAllTodos;
+  onSubmitTodoForm() {
+    this.store.dispatch(new AddTodo(this.todoForm.value));
+    this.updateData();
+    return this.toggleTodoForm();
   }
 
-  toggleTodoForm() {
-    return this.showTodoForm = !this.showTodoForm;
+  onSubmitEditTodoForm() {
+    this.store.dispatch(new UpdateTodo(this.todoForm.value));
+    this.toggleTodoForm();
+    return this.updateData();
   }
 
-  onSubmitTodoForm(event: any) {
-    return this.todoService.addTodo(this.todoForm.value).subscribe(res => {
-      this.toggleTodoForm();
-      this.getTodos();
-      this.todoForm.reset();
-    })
+  onRemoveTodo(todo: Todo) {
+    this.store.dispatch(new RemoveTodo(todo));
+    return this.updateData();
   }
 
-  onSubmitEditTodoForm(event: any) {
-    return this.todoService.updateTodo(this.todoForm.value).subscribe(res => {
-      this.toggleTodoForm();
-      this.getTodos();
-      this.isEdditingForm = false;
-      this.todoForm.reset();
-    })
-  }
-
-  onRemoveTodo(todo: any) {
-    return this.todoService.removeTodo(todo._id).subscribe(res => {
-      this.getTodos();
-      this.todoForm.reset();
-    })
-  }
-
-  onEditTodo(todo: any) {
+  onEditTodo(todo: Todo) {
     this.todoForm.patchValue({
       _id: todo._id,
       todoName: todo.todoName,
@@ -88,10 +93,21 @@ export class TodoComponent implements OnInit {
     return this.toggleTodoForm();
   }
 
-  onCancelTodoForm() {
-    this.toggleTodoForm();
-    this.isEdditingForm = false;
+  toggleButtonAllTodos() {
+    return this.showButtonAllTodos = !this.showButtonAllTodos;
+  }
+
+  toggleTodoForm() {
+    return this.showTodoForm = !this.showTodoForm;
+  }
+
+  updateData() {
     this.todoForm.reset();
+    this.isEdditingForm = false;
+  }
+
+  onCancelTodoForm() {
+    this.updateData();
   }
 
 }

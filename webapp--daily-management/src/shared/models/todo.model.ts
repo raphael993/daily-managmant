@@ -1,7 +1,9 @@
 export interface Todo {
-    _id: number,
-    name: string,
-    description: string,
-    type: string,
-    status: number
+    _id: string,
+    todoName: string,
+    todoDescription: string,
+    todoDate: string,
+    todoTime: string,
+    todoLocation: string,
+    todoStatus: string
 }
