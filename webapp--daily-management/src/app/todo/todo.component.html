@@ -9,8 +9,10 @@
 
         <div class="row general-buttons">
             <div class="d-flex flex-row-reverse">
-                <button type="button" class="btn btn-primary" (click)="toggleTodoForm()">Add a new TO-DO</button>
-                <button type="button" class="btn btn-secondary" (click)="toggleButtonAllTodos()">{{ showButtonAllTodos ? 'Hide' : 'Show'  }} all TO-DO's</button>
+                <button type="button" class="btn btn-primary" (click)="toggleTodoForm()">
+                    <i class="bi bi-calendar-plus"></i>
+                </button>
+                <button type="button" class="btn btn-secondary" (click)="toggleButtonAllTodos()">{{ showButtonAllTodos ? 'Hide' : 'Show'  }} all {{ todoList.length }} TO-DO's</button>
               </div>
         </div>
 
@@ -27,17 +29,22 @@
         <div class="row" class="todo__lists">
             
             <div class="todo__lists--today">
-                <p>TO-DO's for today:</p>
+                <p>TO-DO's for today: <span>{{ todaysTodos.length }}</span></p>
                 <app-todo-group 
                     *ngIf="todoList?.length"
-                    [todoList]="todoList"
+                    [todoList]="todaysTodos"
                     (removeTodo)="onRemoveTodo($event)"
                     (editTodo)="onEditTodo($event)"
                 ></app-todo-group>
             </div>
             
             <div class="todo__lists--all" *ngIf="showButtonAllTodos && todoList?.length">
-                <app-todo-group [todoList]="todoList"></app-todo-group>
+                <p>All TO-DO's:</p>
+                <app-todo-group
+                    [todoList]="todoList"
+                    (removeTodo)="onRemoveTodo($event)"
+                    (editTodo)="onEditTodo($event)"
+                ></app-todo-group>
             </div>
             
         </div>

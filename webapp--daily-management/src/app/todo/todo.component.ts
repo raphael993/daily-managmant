@@ -27,6 +27,7 @@ export class TodoComponent implements OnInit {
   isEdditingForm = false;
   todoList: any;
   todoForm: any;
+  todaysTodos: Array<Todo> = [];
 
 
   ngOnInit(): void {
@@ -42,10 +43,11 @@ export class TodoComponent implements OnInit {
   subscribeToTodos() {
     this.todosState$?.subscribe(res => {
       this.todoList = res.todos;
-    })
+      this.todaysTodos = this.filterTodaysTodos(this.todoList);
+    });
   }
   
-  createTodoForm() {
+  createTodoForm(): FormGroup {
     return this.todoForm = this.formBuilder.group({
       _id: [null],
       todoName: [null],
@@ -93,11 +95,22 @@ export class TodoComponent implements OnInit {
     return this.toggleTodoForm();
   }
 
-  toggleButtonAllTodos() {
+  filterTodaysTodos(todos: Array<Todo>): Array<Todo> {
+
+    const today = new Date();
+
+     return todos.filter( todo => {
+      let day = new Date(todo.todoDate).getDay() + 1;
+      return day === today.getDay();
+    });
+
+  };
+
+  toggleButtonAllTodos(): boolean {
     return this.showButtonAllTodos = !this.showButtonAllTodos;
   }
 
-  toggleTodoForm() {
+  toggleTodoForm(): boolean {
     return this.showTodoForm = !this.showTodoForm;
   }
 
@@ -108,6 +121,7 @@ export class TodoComponent implements OnInit {
 
   onCancelTodoForm() {
     this.updateData();
+    this.toggleTodoForm();
   }
 
 }

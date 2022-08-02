@@ -4,16 +4,25 @@
 }
 
 .todo__lists {
-
     &--today {
         padding: 5px;
-        border: 1px solid green;
         margin-bottom: 20px;
+
+        p {
+            span {
+                color: green;
+                font-weight: 700;
+                font-size: 24px;
+                border-radius: 100%;
+                border: 3px solid green;
+                padding: 5px 10px;
+            }
+        }
     }
 
     &--all {
         padding: 5px;
-        border: 1px solid gray;
+       /*  border: 1px solid gray; */
     }
 }
 

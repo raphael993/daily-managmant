@@ -7,22 +7,26 @@
             <th>When</th>
             <th>Where</th>
             <th>Date</th>
-            <th>Status</th>
+            <!-- <th>Status</th> -->
             <th></th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let todo of todoList; let i=index">
-            <td>{{ i }}</td>
+            <td>{{ i + 1 }}</td>
             <td>{{ todo.todoName }}</td>
             <td>{{ todo.todoDescription }}</td>
             <td>{{ todo.todoTime }}</td>
             <td>{{ todo.todoLocation }}</td>
-            <td>{{ todo.todoDate }}</td>
-            <td>{{ todo.todoStatus }}</td>
-            <td>
-                <button (click)="onEditTodo(todo)">Edit</button>
-                <button (click)="onRemoveTodo(todo)">remove</button>
+            <td [ngClass]="{ 'istoday' : isTodayTodo(todo) }">{{ isTodayTodo(todo) ? 'today' : todo.todoDate }}</td>
+            <!-- <td>{{ todo.todoStatus }}</td> -->
+            <td class="todo-group__buttons">
+                <button class="btn btn-info" (click)="onEditTodo(todo)">
+                    <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-danger" (click)="onRemoveTodo(todo)">
+                    <i class="bi bi-trash"></i>
+                </button>
             </td>
         </tr>
     </tbody>

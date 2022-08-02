@@ -1,0 +1,27 @@
+.istoday {
+    color: green;
+}
+
+.todo-group__status {
+    &--pending {
+        color: green
+    }
+
+    &--doing {
+        color: blue;
+    }
+
+    &--done {
+        color: gray;
+    }
+
+    &--cenceled {
+        color: red;
+    }
+}
+
+.todo-group__buttons {
+    button {
+        margin-left: 5px;
+    }
+}

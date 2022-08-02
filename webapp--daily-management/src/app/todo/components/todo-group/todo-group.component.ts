@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Todo } from 'src/shared/models/todo.model';
 
 @Component({
   selector: 'app-todo-group',
@@ -22,6 +23,10 @@ export class TodoGroupComponent implements OnInit {
 
   onEditTodo(todo: any) {
     this.editTodo.emit(todo);
+  }
+
+  isTodayTodo(todo: Todo): boolean {
+    return (new Date(todo.todoDate).getDay() + 1) === new Date().getDay();
   }
 
 }
