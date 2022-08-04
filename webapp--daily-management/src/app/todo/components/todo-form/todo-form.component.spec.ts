@@ -20,4 +20,28 @@ describe('TodoFormComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should test onSubmitTodoForm method', () => {
+    spyOn(component.submitTodoForm, 'emit');
+
+    component.onSubmitTodoForm();
+
+    expect(component.submitTodoForm.emit).toHaveBeenCalled();
+  });
+
+  it('should test onSubmitEditTodoForm method', () => {
+    spyOn(component.submitEditTodoForm, 'emit');
+
+    component.onSubmitEditTodoForm();
+
+    expect(component.submitEditTodoForm.emit).toHaveBeenCalled();
+  });
+
+  it('should test onCancel method', () => {
+    spyOn(component.cancel, 'emit');
+
+    component.onCancel();
+
+    expect(component.cancel.emit).toHaveBeenCalled();
+  });
 });

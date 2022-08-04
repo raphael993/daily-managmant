@@ -17,11 +17,11 @@ export class TodoGroupComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onRemoveTodo(todo: any) {
+  onRemoveTodo(todo: Todo) {
     this.removeTodo.emit(todo);
   }
 
-  onEditTodo(todo: any) {
+  onEditTodo(todo: Todo) {
     this.editTodo.emit(todo);
   }
 

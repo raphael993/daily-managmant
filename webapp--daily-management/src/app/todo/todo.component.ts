@@ -17,9 +17,9 @@ export class TodoComponent implements OnInit {
   @Select(TodosState) todosState$: Observable<TodoStateModel> | undefined;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private todoService: TodoService,
-    private store: Store
+    readonly formBuilder: FormBuilder,
+    readonly todoService: TodoService,
+    readonly store: Store
   ) { }
 
   showButtonAllTodos = false;
