@@ -4,6 +4,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 import { SafeSubscriber } from 'rxjs/internal/Subscriber';
+import { environment } from 'src/environments/environment';
 
 import { TodoService } from './todo.service';
 
@@ -42,7 +43,7 @@ describe('TodoService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.get).toHaveBeenCalled();
+    expect(service.http.get).toHaveBeenCalledWith(`${environment.api}/todos`);
   });
 
   it('should test getTodo method', () => {
@@ -53,7 +54,7 @@ describe('TodoService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.get).toHaveBeenCalled();
+    expect(service.http.get).toHaveBeenCalledWith(`${environment.api}/todos/${todoMock._id}`);
   });
 
   it('should test addTodo method', () => {
@@ -63,7 +64,7 @@ describe('TodoService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.post).toHaveBeenCalled();
+    expect(service.http.post).toHaveBeenCalledWith(`${environment.api}/todos/`, todoMock);
   });
 
   it('should test updateTodo method', () => {
@@ -73,7 +74,7 @@ describe('TodoService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.put).toHaveBeenCalled();
+    expect(service.http.put).toHaveBeenCalledWith(`${environment.api}/todos/${todoMock._id}`, todoMock);
   });
 
   it('should test removeTodo method', () => {
@@ -83,6 +84,6 @@ describe('TodoService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.delete).toHaveBeenCalled();
+    expect(service.http.delete).toHaveBeenCalledWith(`${environment.api}/todos/${todoMock._id}`);
   });
 });

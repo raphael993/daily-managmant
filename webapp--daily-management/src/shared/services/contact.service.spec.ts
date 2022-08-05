@@ -3,6 +3,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 import { ContactService } from './contact.service';
 
@@ -41,7 +42,7 @@ describe('ContactService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.get).toHaveBeenCalled();
+    expect(service.http.get).toHaveBeenCalledWith(`${environment.api}/contacts`);
   });
 
   it('should test getTodo method', () => {
@@ -52,7 +53,7 @@ describe('ContactService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.get).toHaveBeenCalled();
+    expect(service.http.get).toHaveBeenCalledWith(`${environment.api}/contacts/${contactMock.id}`);
   });
 
   it('should test addTodo method', () => {
@@ -62,7 +63,7 @@ describe('ContactService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.post).toHaveBeenCalled();
+    expect(service.http.post).toHaveBeenCalledWith(`${environment.api}/contacts/`, contactMock);
   });
 
   it('should test updateTodo method', () => {
@@ -72,7 +73,7 @@ describe('ContactService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.put).toHaveBeenCalled();
+    expect(service.http.put).toHaveBeenCalledWith(`${environment.api}/contacts/${contactMock.id}`, contactMock);
   });
 
   it('should test removeTodo method', () => {
@@ -82,6 +83,6 @@ describe('ContactService', () => {
         next: (res) => expect(res).toBeDefined()
     });
 
-    expect(service.http.delete).toHaveBeenCalled();
+    expect(service.http.delete).toHaveBeenCalledWith(`${environment.api}/contacts/${contactMock.id}`);
   });
 });

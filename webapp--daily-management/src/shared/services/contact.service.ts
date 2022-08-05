@@ -20,7 +20,7 @@ export class ContactService {
   }
 
   addContanct(contact: Contact): Observable<any> {
-    return this.http.post(`${environment.api}/contacts/${contact}`, contact);
+    return this.http.post(`${environment.api}/contacts/`, contact);
   }
 
   updateContanct(contanct: Contact): Observable<any> {
